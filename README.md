@@ -10,6 +10,12 @@ Yasai is a lightweight HTTP live streaming player implemented in JavaScript. Des
 
 - **Browser Support**: `YasaiLivePlayer.SUPPORTMYPLAYERORNOT` returns `true` or `false` for compatibility.
 
+## Settings
+
+- **fragLoadingTimeOut**: `60000` Time limit for loading a fragment.
+- **fragLoadingMaxRetry**: `6` Number of retry attempts allowed for loading a fragment.
+- **fragLoadingRetryDelay**: `250` Delay between retry attempts for loading a fragment.
+
 ### Methods
 
 - **create player**: `var Yasai = new YasaiLivePlayer();` Initializes a new player instance.
@@ -43,6 +49,13 @@ Yasai เป็นเครื่องเล่น HTTP live streaming ที�
 ## คู่มือ
 
 - **การสนับสนุน Browser**: `YasaiLivePlayer.SUPPORTMYPLAYERORNOT` จะคืนค่า `true` หรือ `false` เพื่อตรวจสอบความเข้ากันได้
+
+## การตั้งค่า
+
+- **fragLoadingTimeOut**: `60000` ข้อจำกัดเวลาสำหรับการโหลดชิ้นส่วน
+- **fragLoadingMaxRetry**: `6` จำนวนครั้งที่ลองโหลดชิ้นส่วน ได้สูงสุด
+- **fragLoadingRetryDelay**: `250` ระยะเวลารอระหว่างการลองโหลดใหม่สำหรับชิ้นส่วน
+
 
 ### เมธอด
 
