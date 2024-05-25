@@ -1,0 +1,173 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped:wght@300;400&display=swap');
+
+/* General resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and HTML */
+body, html {
+    height: 100%;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+/* Container */
+#Container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#VideoHandle {
+    width: 100%;
+}
+
+/* Loader */
+#Loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; /* Adjust loader size */
+    height: 100px; /* Adjust loader size */
+}
+
+#Loader svg {
+    width: 100%;
+    height: 100%;
+    animation: Loader 2s linear infinite;
+    fill: #f0f0f0; /* Blue color for loader */
+}
+
+/* Loader animations */
+@keyframes Loader {
+    0%, 100% {
+        transform: rotateX(360deg) rotateY(0deg) rotateZ(0deg);
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(0deg) rotateZ(0deg);
+    }
+}
+
+/* Control */
+#Control {
+    position: absolute;
+    bottom: 0;
+    height: 70px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+/* Play button */
+#ControlPlay,
+#ControlFullScreen {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: height 50ms;
+}
+
+button {
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+path {
+    fill: white;
+}
+
+#ControlPlay svg,
+#ControlFullScreen svg {
+    width: 50%;
+    height: 50%;
+}
+
+#ControlPlay:hover,
+#ControlFullScreen:hover,
+#ControlPlay:active,
+#ControlFullScreen:active {
+    height: 100%;
+}
+
+/* Process bar */
+#Process {
+    position: relative;
+    width: 50%; /* Initially set width to 50% */
+    height: 40%;
+    background-color: white;
+    border-radius: 50px; /* Make it fully rounded */
+    text-align: left;
+    resize: horizontal; /* Allow horizontal resizing */
+    overflow: hidden; /* Hide overflowing content */
+    min-width: 100px; /* Minimum width to prevent excessive shrinking */
+}
+
+#ProcessDisplay {
+    position: relative;
+    font-family: "Noto Sans Thai Looped", sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    font-style: normal;
+    color: black;
+    left: 3%;
+}
+
+#BufferProcess,
+#CurrentProcess,
+#HighlightProcess,
+#seekBar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+#seekBar {
+    width: 100%;
+    opacity: 0;
+}
+
+#HighlightProcess {
+    left: 50%;
+    width: .4%;
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+}
+
+#HighlightProcess:hover {
+    background-color: rgb(247, 0, 0);
+}
+
+#BufferProcess {
+    width: 60%;
+    background-color: blue;
+}
+
+#CurrentProcess {
+    width: 50%;
+    background-color: green;
+}
+
+
+/* Time icon */
+#TimeIcon {
+    position: relative;
+    height: 60%;
+    width: 10%;
+    right: 15%;
+}
+
+#TimeIcon path {
+    fill: white;
+}
