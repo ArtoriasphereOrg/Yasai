@@ -1,3 +1,5 @@
+[DOWNLOAD FILE](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ArtoriasphereOrg/Yasai/raw/main/YasaiPlayer.js)
+
 # Yasai EN
 
 Yasai is a lightweight HTTP live streaming player implemented in JavaScript. Despite employing obfuscation for enhanced security, it remains efficient and fast.
