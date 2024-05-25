@@ -30,7 +30,7 @@ Yasai is a lightweight HTTP live streaming player implemented in JavaScript. Des
 
 Yasai offers a comprehensive toolkit for managing HTTP live streaming in JavaScript, ensuring smooth integration and reliable performance.
 
-# -------- ------------- --------------- ----------------------- ------------------------------------------------ >>>
+# -------- --------- >>>
 
 # Yasai TH - Translate
 
