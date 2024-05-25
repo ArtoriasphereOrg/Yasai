@@ -26,7 +26,7 @@ Yasai is a lightweight HTTP live streaming player implemented in JavaScript. Des
 
 - `yasaiMediaAdded`: Triggered when media is added to the player.
 - `yasaiMediaRemoved`: Fired upon removal of media from the player.
-- `ysaiSegAppending`: Indicates the initiation of segment appending.
+- `yasaiSegAppending`: Indicates the initiation of segment appending.
 - `yasaiSegFlushing`: Signifies the flushing of segments.
 - `yasaiSegFlushed`: Fired after segments are flushed.
 - `yasaiSegParsingInit`: Marks the initialization of segment parsing.
@@ -60,7 +60,7 @@ Yasai เป็นเครื่องเล่น HTTP live streaming ที�
 
 - `yasaiMediaAdded`: เกิดขึ้นเมื่อมีสื่อถูกเพิ่มเข้าไปในเครื่องเล่น
 - `yasaiMediaRemoved`: เกิดขึ้นเมื่อมีการลบสื่อออกจากเครื่องเล่น
-- `ysaiSegAppending`: แสดงถึงการเริ่มต้นการเพิ่มส่วน
+- `yasaiSegAppending`: แสดงถึงการเริ่มต้นการเพิ่มส่วน
 - `yasaiSegFlushing`: แสดงถึงการล้างส่วน
 - `yasaiSegFlushed`: เกิดขึ้นหลังจากที่ส่วนถูกล้าง
 - `yasaiSegParsingInit`: บ่งชี้ถึงการเริ่มต้นการวิเคราะห์ส่วน
