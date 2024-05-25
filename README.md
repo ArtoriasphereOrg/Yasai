@@ -12,7 +12,7 @@ Yasai is a lightweight HTTP live streaming player implemented in JavaScript. Des
 
 ### Methods
 
-- **create player**: `var ele = new YasaiLivePlayer();` Initializes a new player instance.
+- **create player**: `var Yasai = new YasaiLivePlayer();` Initializes a new player instance.
 
 - **add_elementvid(element)**: Attaches the video element to the player.
 
