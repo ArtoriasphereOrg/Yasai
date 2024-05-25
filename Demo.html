@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yasai.js Example</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        #video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/ArtoriasphereOrg/Yasai@main/YasaiPlayer.js"></script>
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" controls></video>
+    </div>
+    <script>
+        if (YasaiLivePlayer.SUPPORTMYPLAYERORNOT()) {
+            var Video = document.getElementById('video');
+            var Player = new YasaiLivePlayer({});
+            Player.givesource('https://vipanicdn.net/093997b0a3046470bdf294d6575e93edce3d94d2464fe331996d922afcbf78cfaa396492cd2dfd0741f728c712d6dfcfb63865f2ee1e595ae5dec89220318e9ebbb21f28b43e8501b34d4c43eb425ae571d46130b114835e51fe4a3eb7a4231f4b120ab9aa197424f070a151b0305906ea84924b139a4654ddcc9c9cb165f569/3c49e3dc2acc92157c846f6388f538b3/boku-no-hero-academia-7th-season-episode-4-1716630301.original.m3u8');
+            Player.add_elementvid(Video);
+            Player.yasaion(YasaiLivePlayer.Events.yasaiMediaAdded, function() {
+                console.log('Loaded');
+            });           
+            Player.yasaion(YasaiLivePlayer.Events.yasaiSegAppending, function(Event,Callback) {
+                console.log(Event,Callback);
+            });
+            Player.yasaion(YasaiLivePlayer.Events.yasaiEr, function(Event,Callback){
+                console.log(Event,Callback);
+            });
+        }
+    </script>
+</body>
+</html>
