@@ -43,7 +43,6 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
     border: none;
     width: 50vw;
     height: 30vw;
@@ -241,6 +240,8 @@ path {
     height: 60%;
 }
 
+
+
 #Follow {
     font-family: "Noto Sans Thai Looped", sans-serif;
     font-weight: 600;
@@ -250,6 +251,48 @@ path {
     color: #fff;
     z-index: 11;
     pointer-events: none;
+}
+
+
+.set {
+    border-radius: 20px;
+    font-family: "Noto Sans Thai Looped", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.open {
+    animation: Open 1s linear;
+    background: rgba(0,0,0,0.8);
+    opacity: 1;
+}
+
+.close {
+    animation: Close 1s linear;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+}
+
+@keyframes Close {
+    0% {
+        opacity: 1;
+        background: rgba(0,0,0,0.8);
+    }
+    100% {
+        opacity: 0;
+        background: rgba(0,0,0,0);
+    }
+}
+
+@keyframes Open {
+    0% {
+        opacity: 0;
+        background: rgba(0,0,0,0);
+    }
+    100% {
+        opacity: 1;
+        background: rgba(0,0,0,0.8);
+    }
 }
 
 @media only screen and (max-width: 767px) {
