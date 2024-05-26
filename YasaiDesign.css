@@ -11,6 +11,8 @@
 /* Body and HTML */
 body, html {
     height: 100%;
+    font-size: 1vw;
+    font-size-adjust: calc();
     overflow: hidden;
     background-color: #000000;
 }
@@ -24,26 +26,60 @@ body, html {
 
 #VideoHandle {
     width: 100%;
+    height: 100%;
 }
 
-/* Loader */
 #Loader {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100px; /* Adjust loader size */
-    height: 100px; /* Adjust loader size */
+    width: 20%;
+    height: 20%;
+}
+
+#DebugPanel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    width: 50vw;
+    height: 30vw;
 }
 
 #Loader svg {
     width: 100%;
     height: 100%;
     animation: Loader 2s linear infinite;
-    fill: #f0f0f0; /* Blue color for loader */
+    fill: #f0f0f0;
+}
+
+#Loader #showproblem {
+    font-family: "Noto Sans Thai Looped", sans-serif;
+    font-weight: 600;
+    font-size: 100%;
+    font-style: normal;
+    text-align: center;
+    color: white;
+}
+
+.LoaderAnimation {
+    animation: Fade 8s linear infinite;
 }
 
 /* Loader animations */
+
+@keyframes Fade {
+    40%, 70% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
 @keyframes Loader {
     0%, 100% {
         transform: rotateX(360deg) rotateY(0deg) rotateZ(0deg);
@@ -57,7 +93,7 @@ body, html {
 #Control {
     position: absolute;
     bottom: 0;
-    height: 70px;
+    height: 8%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     display: flex;
@@ -69,7 +105,9 @@ body, html {
 
 /* Play button */
 #ControlPlay,
-#ControlFullScreen {
+#ControlFullScreen,
+#AudioControl,
+#Debugger {
     width: 10%;
     height: 100%;
     display: flex;
@@ -88,7 +126,9 @@ path {
 }
 
 #ControlPlay svg,
-#ControlFullScreen svg {
+#ControlFullScreen svg,
+#AudioControl svg,
+#Debugger svg{
     width: 50%;
     height: 50%;
 }
@@ -101,36 +141,54 @@ path {
 }
 
 /* Process bar */
-#Process {
+
+#AudioSeekBar, #Process{
     position: relative;
-    width: 50%; /* Initially set width to 50% */
-    height: 40%;
     background-color: white;
-    border-radius: 50px; /* Make it fully rounded */
     text-align: left;
-    resize: horizontal; /* Allow horizontal resizing */
-    overflow: hidden; /* Hide overflowing content */
-    min-width: 100px; /* Minimum width to prevent excessive shrinking */
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#AudioSeekBar {
+    width: 10%;
+    height: 10%;
+}
+
+#Process {
+    right: 2%;
+    width: 50%;
+    height: 15%;
+    min-width: 100px;
 }
 
 #ProcessDisplay {
     position: relative;
     font-family: "Noto Sans Thai Looped", sans-serif;
     font-weight: 600;
-    font-size: 1em;
+    white-space: nowrap;
+    color: white;
     font-style: normal;
-    color: black;
-    left: 3%;
+    margin-right: 20px; 
+    right: 2%;
+}
+
+#seekBaraudio {
+    width: 100%;
+    opacity: 0;
 }
 
 #BufferProcess,
 #CurrentProcess,
 #HighlightProcess,
-#seekBar {
+#seekBar,
+#CurrentProcessAudio,
+#seekBaraudio {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
+    transition: width 0.3s ease;
 }
 
 #seekBar {
@@ -150,17 +208,17 @@ path {
 }
 
 #BufferProcess {
-    width: 60%;
-    background-color: blue;
+    background-color: rgb(118, 196, 127);
 }
 
 #CurrentProcess {
-    width: 50%;
-    background-color: green;
+    background-color: #a3e6af;
 }
 
+#CurrentProcessAudio {
+    background-color: #a3e6af;
+}
 
-/* Time icon */
 #TimeIcon {
     position: relative;
     height: 60%;
@@ -170,4 +228,32 @@ path {
 
 #TimeIcon path {
     fill: white;
+}
+
+@media screen and (orientation:portrait) {
+    #VideoHandle {
+        display: none;
+    }
+}
+
+#graphsegment {
+    width: 60%;
+    height: 60%;
+}
+
+#Follow {
+    font-family: "Noto Sans Thai Looped", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    z-index: 11;
+    pointer-events: none;
+}
+
+@media only screen and (max-width: 767px) {
+    #Follow {
+        display: none;
+    }
 }
