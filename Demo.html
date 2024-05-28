@@ -293,7 +293,6 @@
                 BufferIndex += 0.1
                 precent = Math.floor((Callback.frag.endPTS / VideoDuration) * 100) + '%'
                 buffer_callback = Callback.frag.stats.buffering.start - Callback.frag.stats.buffering.end
-                console.log(Callback)
                 SegmentLoader()
                 DataNumber.push(buffer_callback)
                 DataLabel.push(precent)
