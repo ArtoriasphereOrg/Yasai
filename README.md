@@ -1,6 +1,7 @@
 **Mostly device supported!**
 [DOWNLOAD FILE](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ArtoriasphereOrg/Yasai/raw/main/YasaiPlayer.js) (File.js)
 - **Yasai script injection**: `<script src="https://cdn.jsdelivr.net/gh/ArtoriasphereOrg/Yasai@main/YasaiPlayer.js"></script>`
+- Design are customizable!
 
 # Yasai EN
 
