@@ -44,6 +44,7 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
+    z-index: 11;
     width: 50vw;
     height: 30vw;
 }
@@ -235,9 +236,20 @@ path {
     }
 }
 
+#titledebug {
+    position: relative;
+    color: #fff;
+    left: 10%;
+    top: 5%;
+}
+
 #graphsegment {
-    width: 60%;
-    height: 60%;
+    position: relative;
+    border-color: #000000;
+    border-radius: 30px;
+    top: 10%;
+    pointer-events: none;
+    padding: 3%;
 }
 
 
