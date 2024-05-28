@@ -3,48 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yasai.js Example</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevent scrolling */
-        }
-
-        #video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        #video {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <title>Yasai Player</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ArtoriasphereOrg/Yasai@main/yasaiDesignV3.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/ArtoriasphereOrg/Yasai@main/YasaiPlayer.js"></script>
 </head>
 <body>
-    <div id="video-container">
-        <video id="video" controls></video>
+    <div id="Container">
+        <div id="Controller">
+            <div id='Follow'>
+            </div>
+            <div id="DebugPanel">
+                <span id="titledebug">HTTP live streaming segment debugger</span><br>
+                <canvas id="graphsegment" role="img"></canvas>
+            </div>
+            <div id="Loader">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="1280.000000pt" height="1280.000000pt" viewBox="0 0 1280.000000 1280.000000" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                    <path d="M6165 11720 c-171 -7 -395 -27 -403 -35 -5 -4 380 -2189 388 -2197 3 -4 49 8 101 26 52 19 140 46 195 61 54 15 102 32 106 39 4 6 8 477 8 1046 0 569 -4 1040 -8 1046 -11 17 -171 23 -387 14z"/>
+                    <path d="M6728 11705 c-5 -5 -8 -469 -8 -1032 0 -884 2 -1024 14 -1029 8 -3 64 1 123 10 60 9 152 16 204 16 66 0 100 4 106 13 5 6 85 441 177 966 124 706 165 956 156 961 -16 10 -230 47 -407 71 -170 22 -355 34 -365 24z"/>
+                    <path d="M5354 11620 c-177 -37 -410 -96 -489 -122 -27 -9 -40 -19 -39 -30 3 -29 817 -2258 826 -2258 4 0 45 24 91 54 46 30 118 74 161 97 43 23 79 47 81 53 2 6 -85 513 -193 1126 l-197 1115 -30 2 c-16 1 -111 -16 -211 -37z"/>
+                    <path d="M7675 11558 c-14 -36 -334 -1883 -327 -1889 4 -3 50 -12 102 -19 52 -6 148 -23 213 -36 65 -14 123 -24 129 -22 6 2 152 391 324 863 277 763 311 861 297 872 -37 29 -374 146 -582 203 -79 22 -146 40 -148 40 -2 0 -6 -6 -8 -12z"/>
+                    <path d="M4505 11376 c-157 -60 -357 -147 -487 -212 -67 -34 -86 -48 -81 -60 15 -39 1285 -2230 1297 -2238 11 -8 44 19 138 109 68 65 124 124 126 130 2 7 -184 525 -412 1151 -478 1314 -426 1174 -435 1174 -3 0 -69 -25 -146 -54z"/>
+                    <path d="M8575 11233 c-42 -108 -616 -1696 -613 -1698 2 -2 49 -22 106 -44 56 -22 151 -65 211 -96 82 -41 112 -51 119 -42 5 7 195 334 422 727 227 393 424 734 437 757 l24 42 -68 44 c-170 108 -584 327 -618 327 -7 0 -16 -8 -20 -17z"/>
+                    <path d="M3640 10954 c-224 -137 -510 -338 -510 -359 0 -14 1788 -2145 1799 -2145 5 0 28 30 52 67 24 37 65 96 91 131 47 64 47 64 31 96 -9 17 -206 360 -438 761 -232 402 -524 909 -651 1128 -126 218 -234 397 -239 397 -6 0 -67 -34 -135 -76z"/>
+                    <path d="M9396 10743 c-47 -74 -849 -1468 -852 -1483 -2 -9 38 -45 109 -97 61 -45 142 -109 179 -143 36 -33 71 -60 76 -60 7 0 1004 1179 1106 1307 18 24 18 25 -5 50 -74 79 -556 463 -581 463 -4 0 -19 -17 -32 -37z"/>
+                    <path d="M1116 10708 c-9 -5 -20 -8 -23 -5 -6 7 -120 -50 -141 -71 -24 -24 -63 -93 -68 -117 -11 -65 -9 -103 10 -177 23 -87 51 -141 88 -171 44 -35 96 -65 102 -60 3 3 12 0 20 -6 8 -7 21 -9 27 -5 7 4 35 8 63 10 77 5 121 13 124 24 2 6 11 10 21 10 9 0 24 9 34 20 25 29 35 25 42 -17 4 -21 27 -141 51 -268 54 -281 50 -261 64 -370 21 -170 28 -201 47 -216 15 -13 46 -1 82 33 11 10 23 18 26 18 4 0 13 6 20 13 15 12 27 22 100 77 22 17 51 40 65 52 14 11 43 33 65 47 36 23 168 122 204 153 8 6 40 29 72 51 64 42 74 67 36 91 -29 20 -195 106 -377 197 -80 40 -152 78 -161 86 -9 7 -26 16 -39 18 -13 2 -30 11 -40 20 -9 8 -22 15 -28 15 -7 0 -43 17 -81 37 l-70 37 16 30 c9 17 18 38 19 46 2 8 7 34 12 58 14 66 -27 232 -58 232 -5 0 -11 9 -15 19 -7 22 -84 73 -130 86 -45 12 -158 14 -179 3z"/>
+                    <path d="M2096 10638 c-2 -7 -9 -48 -15 -91 -6 -43 -17 -90 -25 -106 -15 -28 -69 -61 -99 -61 -22 0 -47 -11 -47 -20 0 -4 17 -11 37 -15 50 -9 87 -29 105 -57 19 -28 38 -115 38 -168 0 -26 5 -40 13 -40 8 0 16 28 24 84 18 129 44 164 136 181 59 11 49 24 -30 40 -67 13 -96 65 -109 193 -7 60 -20 88 -28 60z"/>
+                    <path d="M560 10636 c0 -2 16 -27 35 -56 46 -68 46 -103 -1 -164 -19 -26 -34 -51 -32 -56 2 -5 28 7 58 26 79 50 117 45 191 -23 41 -37 42 -13 3 42 -46 66 -46 108 1 169 19 26 35 51 35 56 0 15 -16 12 -31 -6 -19 -23 -84 -54 -114 -54 -30 0 -58 13 -98 46 -26 22 -47 31 -47 20z"/>
+                    <path d="M1726 10590 c-7 -55 -33 -90 -65 -90 -37 0 -32 -20 8 -36 33 -13 43 -23 51 -53 5 -20 10 -46 10 -58 0 -37 19 -26 25 15 9 58 27 86 63 97 39 11 37 24 -8 39 -35 11 -42 25 -55 99 -8 52 -21 46 -29 -13z"/>
+                    <path d="M376 10478 c4 -7 16 -25 26 -40 24 -35 23 -56 -8 -101 -14 -21 -23 -41 -21 -44 3 -2 23 7 44 21 20 14 45 26 53 26 8 0 33 -12 53 -26 21 -14 41 -24 43 -21 3 3 -4 20 -15 38 -28 45 -26 78 4 119 14 18 23 35 21 38 -3 2 -25 -8 -50 -23 -41 -24 -50 -26 -76 -15 -16 7 -35 18 -41 26 -14 18 -43 19 -33 2z"/>
+                    <path d="M2869 10389 c-140 -123 -441 -429 -437 -445 5 -20 2281 -1926 2289 -1917 10 11 110 235 112 252 3 19 -1824 2199 -1844 2200 -8 1 -62 -40 -120 -90z"/>
+                    <path d="M10098 10108 c-50 -58 -1026 -1222 -1056 -1260 -12 -15 -3 -30 73 -125 48 -59 111 -145 142 -191 34 -51 59 -79 66 -75 7 4 176 145 377 313 201 168 498 418 660 554 162 136 296 253 298 260 3 15 -112 167 -217 286 -117 134 -273 300 -281 300 -5 0 -33 -28 -62 -62z"/>
+                    <path d="M2234 9724 c-44 -31 -152 -112 -242 -180 -89 -68 -165 -124 -167 -124 -3 0 -29 -16 -58 -36 -169 -118 -174 -125 -122 -155 19 -11 37 -20 41 -19 4 1 10 -2 13 -7 3 -5 51 -31 106 -58 55 -27 112 -57 128 -68 15 -10 27 -15 27 -10 0 4 4 4 8 -2 4 -5 48 -30 97 -55 50 -24 106 -55 126 -67 20 -12 40 -19 43 -16 3 4 6 2 6 -3 0 -12 67 -37 79 -30 4 3 9 99 10 213 0 115 3 308 6 429 4 180 3 224 -9 233 -11 9 -30 -1 -92 -45z"/>
+                    <path d="M2367 9753 c-7 -11 -13 -860 -7 -866 3 -2 401 -233 885 -512 484 -279 985 -568 1112 -642 128 -74 237 -132 243 -128 5 3 10 14 10 24 0 11 11 63 25 117 25 94 25 98 8 115 -10 9 -333 281 -718 604 -385 323 -888 745 -1119 938 -230 194 -422 353 -426 355 -5 2 -10 -1 -13 -5z"/>
+                    <path d="M6803 9480 c-29 -4 -60 -10 -68 -14 -13 -5 -15 -138 -15 -1138 0 -691 4 -1128 9 -1122 5 5 98 511 205 1124 108 613 198 1125 201 1138 l5 22 -142 -1 c-79 -1 -167 -5 -195 -9z"/>
+                    <path d="M7312 9477 c-5 -7 -80 -415 -166 -907 -165 -937 -232 -1316 -242 -1362 -9 -47 12 -31 35 25 31 72 783 2137 788 2163 4 19 -4 23 -96 42 -88 19 -162 31 -278 46 -17 3 -36 -1 -41 -7z"/>
+                    <path d="M10100 8889 c-360 -302 -665 -560 -678 -572 l-23 -23 55 -114 c30 -63 68 -155 86 -205 17 -49 35 -94 40 -99 5 -5 346 187 792 444 431 248 785 454 788 457 18 18 -366 663 -395 663 -5 -1 -305 -248 -665 -551z"/>
+                    <path d="M6434 9401 c-95 -29 -220 -75 -242 -90 -11 -7 10 -142 108 -697 67 -379 148 -842 181 -1029 33 -186 62 -341 64 -344 3 -2 7 2 10 10 3 8 4 500 3 1094 -3 951 -5 1080 -18 1082 -8 1 -56 -11 -106 -26z"/>
+                    <path d="M5880 9154 c-69 -41 -136 -85 -149 -98 l-23 -24 322 -883 c177 -486 326 -891 331 -899 15 -23 11 3 -170 1024 -92 523 -171 951 -177 953 -5 1 -65 -31 -134 -73z"/>
+                    <path d="M5439 8812 c-85 -83 -110 -114 -105 -127 3 -10 126 -225 273 -479 147 -254 331 -572 409 -708 147 -255 174 -299 174 -283 -1 27 -617 1699 -627 1702 -7 3 -63 -45 -124 -105z"/>
+                    <path d="M10430 8161 l-795 -458 1 -34 c0 -19 10 -90 22 -159 11 -69 23 -155 27 -192 4 -42 11 -68 18 -68 7 0 413 146 902 324 728 264 891 327 893 342 7 47 -235 692 -263 701 -6 2 -368 -203 -805 -456z"/>
+                    <path d="M5126 8436 c-42 -63 -76 -120 -76 -128 0 -7 89 -119 198 -248 108 -129 316 -377 461 -550 145 -173 273 -324 284 -335 l20 -20 -7 20 c-12 34 -789 1375 -796 1375 -4 0 -42 -51 -84 -114z"/>
+                    <path d="M1369 8144 c-72 -192 -202 -695 -183 -714 5 -5 752 -140 1659 -300 908 -160 1665 -293 1684 -297 l33 -6 -3 91 c-2 50 -7 93 -11 97 -6 7 -3043 1115 -3126 1141 -42 13 -43 13 -53 -12z"/>
+                    <path d="M8604 7633 c-351 -295 -771 -646 -932 -781 -161 -135 -290 -247 -288 -250 3 -2 460 258 1016 579 861 498 1010 587 1010 606 0 27 -39 137 -93 263 -41 97 -54 120 -67 120 -3 0 -294 -241 -646 -537z"/>
+                    <path d="M4934 8093 c-9 -21 -29 -69 -45 -107 -16 -38 -27 -76 -24 -85 3 -9 87 -83 187 -166 99 -82 318 -266 486 -407 276 -232 343 -284 301 -231 -178 219 -866 1029 -876 1031 -8 2 -20 -12 -29 -35z"/>
+                    <path d="M10635 7409 c-495 -180 -910 -333 -922 -338 -21 -9 -23 -18 -23 -78 0 -71 -25 -309 -35 -335 -4 -9 -2 -19 3 -22 9 -5 1966 335 2015 350 21 7 21 0 -3 169 -36 247 -107 577 -125 581 -6 1 -415 -146 -910 -327z"/>
+                    <path d="M4791 7683 c-21 -80 -34 -160 -29 -174 3 -8 124 -82 269 -166 145 -83 355 -204 467 -268 112 -65 205 -115 207 -113 5 5 -878 750 -895 756 -5 2 -13 -14 -19 -35z"/>
+                    <path d="M8995 7333 c-253 -146 -651 -376 -885 -511 -576 -332 -680 -395 -645 -387 28 6 1940 700 2014 731 l34 14 -6 98 c-6 107 -35 303 -45 314 -4 4 -214 -113 -467 -259z"/>
+                    <path d="M4726 7283 c-10 -63 -7 -140 7 -150 17 -14 849 -315 854 -310 2 3 -11 14 -29 25 -77 46 -817 472 -821 472 -2 0 -7 -17 -11 -37z"/>
+                    <path d="M1145 7249 c-19 -55 -55 -435 -58 -609 l-2 -145 1759 -3 c968 -1 1764 2 1768 6 9 9 -15 140 -28 152 -5 4 -769 141 -1699 304 -929 164 -1700 300 -1712 303 -14 3 -25 0 -28 -8z"/>
+                    <path d="M9165 6874 c-170 -62 -622 -227 -1004 -366 -382 -139 -685 -254 -674 -256 33 -5 1957 338 1969 351 15 15 42 176 51 296 6 85 5 91 -13 90 -10 0 -158 -52 -329 -115z"/>
+                    <path d="M4729 6944 c-4 -27 4 -121 12 -135 5 -10 28 -20 56 -24 26 -4 185 -31 352 -61 168 -30 314 -54 325 -52 15 2 -309 125 -731 276 -7 2 -14 0 -14 -4z"/>
+                    <path d="M10647 6636 c-565 -101 -1029 -185 -1031 -187 -2 -2 -23 -62 -46 -134 -23 -71 -53 -156 -66 -187 -13 -32 -24 -60 -24 -63 0 -3 501 -5 1114 -5 l1113 0 7 46 c7 58 6 531 -3 634 -4 56 -10 75 -21 76 -8 1 -477 -80 -1043 -180z"/>
+                    <path d="M4775 6584 c15 -85 5 -80 182 -87 203 -9 411 -7 443 3 14 4 20 8 15 9 -6 1 -150 26 -320 56 -171 30 -314 55 -319 55 -4 0 -5 -16 -1 -36z"/>
+                    <path d="M8745 6300 c-335 -60 -756 -135 -935 -166 -179 -31 -332 -60 -340 -65 -8 -5 389 -9 896 -9 l911 0 36 78 c35 76 97 245 97 263 0 5 -12 9 -27 8 -16 0 -302 -50 -638 -109z"/>
+                    <path d="M1083 6172 c9 -212 47 -585 61 -600 5 -4 3544 621 3557 629 13 7 -2 67 -27 107 l-14 22 -1792 0 -1791 0 6 -158z"/>
+                    <path d="M4855 6320 c-7 -11 18 -75 33 -84 12 -7 474 73 486 85 6 5 -100 9 -251 9 -156 0 -264 -4 -268 -10z"/>
+                    <path d="M5143 6106 c-94 -17 -175 -34 -179 -38 -10 -11 16 -68 32 -68 15 0 339 116 363 130 28 17 -34 10 -216 -24z"/>
+                    <path d="M2965 5723 c-979 -173 -1783 -318 -1787 -322 -14 -13 78 -398 148 -613 32 -100 38 -110 57 -105 17 3 3054 1107 3365 1222 43 17 72 33 72 42 0 28 -40 93 -58 92 -9 -1 -818 -143 -1797 -316z"/>
+                    <path d="M3545 5291 c-737 -269 -1513 -551 -1725 -628 -322 -117 -385 -144 -388 -160 -8 -51 279 -659 310 -657 15 1 3186 1829 3207 1849 12 11 10 19 -8 49 -13 20 -30 36 -39 36 -9 -1 -620 -221 -1357 -489z"/>
+                    <path d="M7382 5705 c9 -9 1240 -455 1256 -455 10 0 64 47 122 105 58 58 102 105 100 105 -3 0 -324 56 -715 125 -647 114 -778 135 -763 120z"/>
+                    <path d="M7260 5562 c0 -11 977 -572 997 -572 21 0 213 117 213 129 0 5 -12 14 -27 20 -24 9 -736 269 -1075 391 -60 22 -108 36 -108 32z"/>
+                    <path d="M3450 4634 c-883 -509 -1611 -932 -1619 -939 -11 -11 -2 -31 55 -121 138 -220 330 -483 354 -484 8 0 625 512 1370 1138 1620 1358 1494 1252 1498 1266 2 9 -42 66 -51 66 -2 0 -725 -417 -1607 -926z"/>
+                    <path d="M7145 5413 c97 -88 691 -580 708 -586 16 -7 47 0 111 25 49 18 90 37 90 42 1 6 -51 40 -114 76 -556 322 -779 450 -796 455 -18 6 -18 6 1 -12z"/>
+                    <path d="M8956 5299 c-73 -75 -114 -124 -107 -128 24 -15 2392 -873 2396 -869 6 6 -80 221 -150 378 -73 163 -212 405 -244 424 -5 3 -355 66 -777 140 -423 75 -818 144 -879 156 -60 11 -112 20 -115 20 -3 0 -58 -55 -124 -121z"/>
+                    <path d="M3788 4162 c-784 -658 -1429 -1203 -1432 -1210 -3 -7 27 -49 66 -95 109 -125 418 -427 436 -426 10 0 437 501 972 1140 525 627 1064 1270 1198 1429 133 160 242 295 242 300 0 17 -31 60 -44 60 -6 -1 -653 -540 -1438 -1198z"/>
+                    <path d="M5309 5078 c-47 -57 -582 -694 -1188 -1417 -606 -722 -1107 -1322 -1114 -1333 -11 -17 -7 -24 28 -55 127 -112 518 -386 544 -381 11 3 647 1095 1707 2937 l175 303 -22 24 c-12 13 -27 24 -33 24 -6 0 -50 -46 -97 -102z"/>
+                    <path d="M8547 4967 c-106 -72 -117 -82 -101 -94 10 -7 553 -322 1207 -700 901 -519 1193 -684 1205 -677 45 29 366 614 347 632 -12 12 -2512 922 -2528 921 -7 -1 -65 -37 -130 -82z"/>
+                    <path d="M5576 4998 c-8 -13 -317 -547 -686 -1188 -370 -641 -780 -1350 -911 -1577 -131 -227 -239 -419 -241 -428 -4 -21 162 -114 397 -223 177 -83 242 -109 249 -101 2 2 282 767 621 1699 339 932 625 1719 635 1747 l20 53 -22 20 c-28 26 -44 25 -62 -2z"/>
+                    <path d="M8142 4745 c-57 -25 -107 -45 -112 -45 -6 0 -10 -6 -10 -12 1 -7 267 -236 592 -508 852 -714 1058 -887 1381 -1158 159 -133 294 -242 302 -242 34 0 460 524 453 557 -2 12 -2482 1453 -2498 1452 -3 0 -51 -20 -108 -44z"/>
+                    <path d="M6036 4761 c-6 -9 -556 -3128 -556 -3152 0 -10 70 -69 178 -149 97 -73 238 -182 313 -242 75 -59 139 -108 143 -108 3 0 6 814 6 1809 0 1435 -3 1810 -12 1818 -24 18 -67 32 -72 24z"/>
+                    <path d="M6290 2870 l0 -1790 203 0 c186 1 501 21 513 33 5 5 -587 3389 -611 3495 -6 23 -56 52 -90 52 -13 0 -15 -189 -15 -1790z"/>
+                    <path d="M7695 4598 c-44 -11 -81 -21 -83 -23 -3 -3 1820 -2182 1990 -2379 25 -29 26 -30 52 -13 94 62 516 439 516 461 0 7 -526 455 -1170 995 -967 811 -1174 981 -1197 980 -15 -1 -64 -10 -108 -21z"/>
+                    <path d="M6576 4582 c-4 -7 579 -3347 599 -3429 6 -26 0 -26 255 23 167 33 438 98 448 109 8 8 17 -15 -598 1673 -582 1599 -583 1601 -614 1611 -57 17 -85 21 -90 13z"/>
+                    <path d="M7313 4540 c-39 -3 -74 -7 -77 -11 -7 -7 1618 -2821 1636 -2833 16 -10 133 53 347 186 213 134 272 177 264 193 -24 42 -2066 2463 -2081 2466 -9 2 -49 2 -89 -1z"/>
+                    <path d="M6890 4528 c0 -20 1148 -3170 1159 -3181 23 -23 652 230 659 265 3 16 -1635 2866 -1667 2900 -22 23 -151 37 -151 16z"/>
+                    <path d="M10508 2745 c-32 -63 -58 -119 -58 -125 0 -6 48 -10 130 -10 72 0 130 2 130 5 0 18 -124 245 -133 245 -7 0 -38 -52 -69 -115z"/>
+                    <path d="M10252 2445 c-56 -113 -102 -210 -102 -215 0 -6 79 -10 215 -10 136 0 215 4 215 10 0 20 -205 420 -215 420 -6 0 -56 -92 -113 -205z"/>
+                    <path d="M9918 2155 c-32 -63 -58 -119 -58 -125 0 -6 48 -10 130 -10 72 0 130 2 130 5 0 18 -124 245 -133 245 -7 0 -38 -52 -69 -115z"/>
+                    <path d="M5497 1208 c-4 -213 -3 -334 3 -336 6 -2 10 -9 10 -16 0 -7 27 -37 60 -65 89 -78 433 -352 449 -359 26 -10 31 25 31 213 0 105 5 248 11 318 9 93 9 131 1 139 -8 8 -72 -18 -234 -95 -210 -99 -268 -124 -268 -114 0 2 108 55 240 117 132 63 239 117 238 122 -5 12 -512 407 -524 408 -7 0 -13 -103 -17 -332z"/>
+                    <path d="M6108 460 c-143 -43 -197 -232 -99 -344 45 -51 147 -76 233 -56 97 23 138 82 138 202 0 81 -23 135 -71 170 -45 34 -139 47 -201 28z"/>
+                    </g>
+                    </svg>
+                <div id="showproblem"></div>
+            </div>
+            <div id="Control">
+                <button id="ControlPlay">
+                <svg id="Play1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 7 7" version="1.1">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Dribbble-Light-Preview" transform="translate(-347.000000, -3766.000000)" fill="#000000">
+                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                <path d="M296.494737,3608.57322 L292.500752,3606.14219 C291.83208,3605.73542 291,3606.25002 291,3607.06891 L291,3611.93095 C291,3612.7509 291.83208,3613.26444 292.500752,3612.85767 L296.494737,3610.42771 C297.168421,3610.01774 297.168421,3608.98319 296.494737,3608.57322" id="play-[#1003]">
+                
+                </path>
+                            </g>
+                        </g>
+                    </g>
+                </svg><svg id="Play2"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-1 0 8 8" version="1.1">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Dribbble-Light-Preview" transform="translate(-227.000000, -3765.000000)" fill="#000000">
+                            <g id="icons" transform="translate(56.000000, 160.000000)">
+                                <path d="M172,3605 C171.448,3605 171,3605.448 171,3606 L171,3612 C171,3612.552 171.448,3613 172,3613 C172.552,3613 173,3612.552 173,3612 L173,3606 C173,3605.448 172.552,3605 172,3605 M177,3606 L177,3612 C177,3612.552 176.552,3613 176,3613 C175.448,3613 175,3612.552 175,3612 L175,3606 C175,3605.448 175.448,3605 176,3605 C176.552,3605 177,3605.448 177,3606" id="pause-[#1006]"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg></button>
+                <div id="ProcessDisplay">--:-- / --:--</div>
+                <div id="Process">
+                    <div id="BufferProcess"></div>
+                    <div id="CurrentProcess"></div>
+                    <div id="HighlightProcess"></div>
+                    <input type="range" id="seekBar" min="0" max="100" value="0">
+                </div>
+                <button id="AudioControl">
+                    <svg id='Audio1' xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px" viewBox="0 0 1920 1920">
+                        <path d="M1129.432 113v1694.148H903.545l-451.772-451.773V564.773L903.545 113h225.887Zm542.545 248.057C1832.017 521.097 1920 733.882 1920 960.107c0 226.226-87.983 438.898-248.023 598.938l-79.851-79.85c138.694-138.582 214.93-323.018 214.93-519.087 0-196.183-76.236-380.506-214.93-519.2ZM338.83 564.773v790.602H169.415C75.672 1355.375 0 1279.703 0 1185.96V734.187c0-93.742 75.672-169.414 169.415-169.414H338.83Zm1093.922 36.085c95.776 97.018 148.407 224.644 148.407 359.16 0 134.628-52.631 262.253-148.407 359.272l-80.303-79.174c74.656-75.897 115.767-175.4 115.767-280.099 0-104.585-41.111-204.088-115.767-279.986Z" fill-rule="evenodd"/>
+                    </svg><svg id='Audio2' xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px" viewBox="0 0 1920 1920">
+                        <path d="M1129.433 113v1694.15H903.547l-451.774-451.773V564.773L903.547 113h225.886ZM338.83 564.773v790.604H169.415c-92.806 0-167.9-74.166-169.392-166.609L0 1185.962V734.188c0-92.805 74.166-167.9 166.608-169.392l2.807-.023H338.83ZM1789.951 635 1920 764.926 1724.988 959.94 1920 1154.95 1789.951 1285l-194.89-195.012L1400.05 1285 1270 1154.951l195.012-195.012L1270 764.926 1400.049 635l195.012 195.012L1789.951 635Z" fill-rule="evenodd"/>
+                    </svg></button>
+                    <div id="AudioSeekBar">
+                        <div id="CurrentProcessAudio"></div>
+                        <input type="range" id="seekBaraudio" min="0" max="100" value="1">
+                    </div>
+                    <button id="Debugger">
+                        <svg id="Debug1" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                            <path d="M10 11C10 10.4477 10.4477 10 11 10H13C13.5523 10 14 10.4477 14 11C14 11.5523 13.5523 12 13 12H11C10.4477 12 10 11.5523 10 11Z" fill="#000000"/>
+                            <path d="M11 14C10.4477 14 10 14.4477 10 15C10 15.5523 10.4477 16 11 16H13C13.5523 16 14 15.5523 14 15C14 14.4477 13.5523 14 13 14H11Z" fill="#000000"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.09447 4.74918C8.41606 4.03243 8 3.0648 8 2H10C10 3.10457 10.8954 4 12 4C13.1046 4 14 3.10457 14 2H16C16 3.0648 15.5839 4.03243 14.9055 4.74918C16.1782 5.45491 17.1673 6.6099 17.6586 8H19C19.5523 8 20 8.44772 20 9C20 9.55229 19.5523 10 19 10H18V12H19C19.5523 12 20 12.4477 20 13C20 13.5523 19.5523 14 19 14H18V16H19C19.5523 16 20 16.4477 20 17C20 17.5523 19.5523 18 19 18H17.6586C16.8349 20.3304 14.6124 22 12 22C9.38756 22 7.16508 20.3304 6.34141 18H5C4.44772 18 4 17.5523 4 17C4 16.4477 4.44772 16 5 16H6V14H5C4.44772 14 4 13.5523 4 13C4 12.4477 4.44772 12 5 12H6V10H5C4.44772 10 4 9.55229 4 9C4 8.44772 4.44772 8 5 8H6.34141C6.83274 6.6099 7.82181 5.45491 9.09447 4.74918ZM8 16V10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10V16C16 18.2091 14.2091 20 12 20C9.79086 20 8 18.2091 8 16Z" fill="#000000"/>
+                            </svg><svg id="Debug2" xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                                <g id="Edit / Close_Circle">
+                                <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </g>
+                                </svg></button>
+                <button id="ControlFullScreen">
+                    <svg id="Full1" xmlns="http://www.w3.org/2000/svg" fill="#000000" width="800px" height="800px" viewBox="0 0 96 96">
+                        <g><path d="M30,60H6A6,6,0,0,0,6,72H24V90a6,6,0,0,0,12,0V66A5.9966,5.9966,0,0,0,30,60Z"/>             
+                        <path d="M90,60H66a5.9966,5.9966,0,0,0-6,6V90a6,6,0,0,0,12,0V72H90a6,6,0,0,0,0-12Z"/>
+                        <path d="M66,36H90a6,6,0,0,0,0-12H72V6A6,6,0,0,0,60,6V30A5.9966,5.9966,0,0,0,66,36Z"/>
+                        <path d="M30,0a5.9966,5.9966,0,0,0-6,6V24H6A6,6,0,0,0,6,36H30a5.9966,5.9966,0,0,0,6-6V6A5.9966,5.9966,0,0,0,30,0Z"/>
+                        </g>
+                        </svg><svg id="Full2"  xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 1.5C2.61929 1.5 1.5 2.61929 1.5 4V8.5C1.5 9.05228 1.94772 9.5 2.5 9.5H3.5C4.05228 9.5 4.5 9.05228 4.5 8.5V4.5H8.5C9.05228 4.5 9.5 4.05228 9.5 3.5V2.5C9.5 1.94772 9.05228 1.5 8.5 1.5H4Z" fill="#000000"/>
+                            <path d="M20 1.5C21.3807 1.5 22.5 2.61929 22.5 4V8.5C22.5 9.05228 22.0523 9.5 21.5 9.5H20.5C19.9477 9.5 19.5 9.05228 19.5 8.5V4.5H15.5C14.9477 4.5 14.5 4.05228 14.5 3.5V2.5C14.5 1.94772 14.9477 1.5 15.5 1.5H20Z" fill="#000000"/>
+                            <path d="M20 22.5C21.3807 22.5 22.5 21.3807 22.5 20V15.5C22.5 14.9477 22.0523 14.5 21.5 14.5H20.5C19.9477 14.5 19.5 14.9477 19.5 15.5V19.5H15.5C14.9477 19.5 14.5 19.9477 14.5 20.5V21.5C14.5 22.0523 14.9477 22.5 15.5 22.5H20Z" fill="#000000"/>
+                            <path d="M1.5 20C1.5 21.3807 2.61929 22.5 4 22.5H8.5C9.05228 22.5 9.5 22.0523 9.5 21.5V20.5C9.5 19.9477 9.05228 19.5 8.5 19.5H4.5V15.5C4.5 14.9477 4.05228 14.5 3.5 14.5H2.5C1.94772 14.5 1.5 14.9477 1.5 15.5V20Z" fill="#000000"/>
+                </svg></button>
+
+            </div>
+        </div>
+        <video id="VideoHandle">
+            <source src="https://www116.vipanicdn.net/streamhls/a6e5287093bc00f9e03eeb00379054a8/ep.24.1713855400.1080.m3u8" id="file"></source>
+        </video>
     </div>
     <script>
-        if (YasaiLivePlayer.SUPPORTMYPLAYERORNOT()) {
-            var Video = document.getElementById('video');
-            var Player = new YasaiLivePlayer({});
-            Player.givesource('https://vipanicdn.net/093997b0a3046470bdf294d6575e93edce3d94d2464fe331996d922afcbf78cfaa396492cd2dfd0741f728c712d6dfcfb63865f2ee1e595ae5dec89220318e9ebbb21f28b43e8501b34d4c43eb425ae571d46130b114835e51fe4a3eb7a4231f4b120ab9aa197424f070a151b0305906ea84924b139a4654ddcc9c9cb165f569/3c49e3dc2acc92157c846f6388f538b3/boku-no-hero-academia-7th-season-episode-4-1716630301.original.m3u8');
-            Player.add_elementvid(Video);
-            Player.yasaion(YasaiLivePlayer.Events.yasaiMediaAdded, function() {
-                console.log('Loaded');
-            });           
-            Player.yasaion(YasaiLivePlayer.Events.yasaiSegAppending, function(Event,Callback) {
-                console.log(Event,Callback);
-            });
-            Player.yasaion(YasaiLivePlayer.Events.yasaiEr, function(Event,Callback){
-                console.log(Event,Callback);
+        const D = document, Yasai = YasaiLivePlayer;
+        const iOS = !window.MSStream && /iPad|iPhone|iPod/.test(navigator.userAgent) || (/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+        const Loader = D.getElementById('Loader');
+        function Loading() {
+            const cha = D.querySelectorAll('#showproblem span')
+            var index = 0
+            cha.forEach(char => {
+                setTimeout(() => {
+                    char.className = 'LoaderAnimation';
+                }, index * 300);
+                index += 1;
             });
         }
+        const showproblem = D.getElementById('showproblem')
+        function Problem(Text) {
+            showproblem.innerText = ''
+            Text.split('').forEach(char => {
+                var span = document.createElement('span');
+                span.innerText = char;
+                showproblem.appendChild(span);
+            });
+            Loader.style.display = 'block';
+            Loading();
+        }
+        function IsSupport() {
+            const Container = D.getElementById('Container'), Fullscreen = D.getElementById('ControlFullScreen'), SeekbarAudio = D.getElementById('seekBaraudio'), Video = D.getElementById('VideoHandle'), Aud1 = D.getElementById('Audio1'), Aud2 = D.getElementById('Audio2'), Full1 = D.getElementById('Full1'), Full2 = D.getElementById('Full2'), Icon1 = D.getElementById('Play1'), Icon2 = D.getElementById('Play2');
+            const AudioSeekBar = D.getElementById('AudioSeekBar') ,Control = D.getElementById('Control'), DebuggerPanel = D.getElementById('DebugPanel'), Debug1 = D.getElementById('Debug1'), Debug2 = D.getElementById('Debug2'), Debugger = D.getElementById('Debugger'), AudioProcesss = D.getElementById('CurrentProcessAudio'), BufferProcess = D.getElementById('BufferProcess'), CurrentProcess = D.getElementById('CurrentProcess'), seekBar = D.getElementById('seekBar');
+            Debug1.style.display = 'block', Debug2.style.display = 'none', Icon1.style.display = 'block', Icon2.style.display = 'none', Video.style.display = 'none',Aud1.style.display = 'block', Aud2.style.display = 'none',Full1.style.display = 'none',Full2.style.display = 'block';
+            Control.style.display = 'none', DebuggerPanel.style.display = 'none';
+            if (!Yasai.SUPPORTMYPLAYERORNOT()) {
+                Problem('Your browser does not support Yasai Player');
+                return
+            }
+            Problem('Loading')
+            const AudioControl = D.getElementById('AudioControl'), Source = D.getElementById('file'), ControlPlay = D.getElementById('ControlPlay'),ProcessDisplay = D.getElementById('ProcessDisplay');
+            var SourceVid = Source.src;
+
+            Source.remove();
+            var Player = new YasaiLivePlayer({
+                fragLoadingTimeOut: 60000,
+                fragLoadingMaxRetry: 10,
+                fragLoadingRetryDelay: 250
+            });
+            Player.givesource(SourceVid);
+            Player.add_elementvid(Video);
+            SourceVid = null;
+
+            const graphSegment = D.getElementById('graphsegment');
+            Player.yasaion(YasaiLivePlayer.Events.yasaiSegParsingInit, function(_, Callback){
+                Loader.style.display = 'none';
+                showproblem.innerText = ''
+                Video.style.display = 'block';
+                Control.style.display = 'flex';
+                Control.className = 'open';
+                if (iOS) {
+                    AudioSeekBar.style.display = 'none';
+                    seekBar.style.display = 'none';
+                    Problem('IOS, please press the play button')
+                    BufferIndex += 1
+                    return
+                }
+            });
+            var PIPVIDEO = false,BufferIndex = 0,BufferTime = 0,Isplaying = false;
+
+            function SegmentLoader() {
+                if (Video.currentTime > (BufferTime + 3)) {
+                    Problem('Segment loading');
+                    BufferIndex += 1
+                    return
+                }
+            }
+            var MouseStop
+            function PlayControlHide() {
+                if (PIPVIDEO || !Isplaying) {
+                    return
+                }
+                Control.className = 'open';
+                clearTimeout(MouseStop);
+                MouseStop = setTimeout(function() {
+                    Control.className = 'close';
+                }, 5000);
+            }
+
+            D.addEventListener('touchmove', PlayControlHide);
+            D.addEventListener('mousemove', PlayControlHide);
+            var precent = '', buffer_callback = 0;
+            var DataLabel = []
+            var DataNumber = []
+
+            const datasetofdebug = {
+                labels: DataLabel,
+                datasets: [{
+                    label: 'Video segment buffer',
+                    type: 'bar',
+                    backgroundColor: '#a3e6af',
+                    borderColor: '#a3e6af',
+                    data: DataNumber,
+            }],
+            }
+
+            const config = {
+                type: 'bar',
+                data: datasetofdebug,
+                options: {
+                    plugins: {
+                        legend: {
+                             labels: {
+                                font: {
+                                    size: 60
+                                }
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 40
+                            }
+                        }
+                        
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 40,
+                            }
+                        }
+                    },
+                    
+                }}
+                const genchart = new Chart(graphSegment, config);
+            Player.yasaion(YasaiLivePlayer.Events.yasaiSegAppending, function(_,Callback){
+                BufferProcess.style.width = (BufferTime / VideoDuration) * 100 + '%'
+                BufferIndex += 0.1
+                precent = Math.floor((Callback.frag.endPTS / VideoDuration) * 100) + '%'
+                buffer_callback = Callback.frag.stats.buffering.start - Callback.frag.stats.buffering.end
+                console.log(Callback)
+                SegmentLoader()
+                DataNumber.push(buffer_callback)
+                DataLabel.push(precent)
+                if (DataNumber.length > 9) {
+                    genchart.data.labels = DataLabel;
+                    genchart.data.datasets[0].data = DataNumber;
+                    genchart.update();
+                    DataNumber = []
+                    DataLabel = []
+                }
+            });
+
+            Player.yasaion(YasaiLivePlayer.Events.yasaiEr, function(_,Callback){
+                PlayButton()
+                Problem('Yasai Player Error');
+                return
+            });
+            function Audiobutton() {
+                AudioProcesss.style.width = (Video.volume * 100) + '%'
+                if (Video.volume > 0 || Video.muted) {
+                    Video.muted = false
+                    Aud1.style.display = 'block';
+                    Aud2.style.display = 'none';
+                    return
+                }
+                Video.muted = true
+                Aud1.style.display = 'none';
+                Aud2.style.display = 'block';
+            }
+
+            function PlayButton() {
+                if (Video.paused) {
+                    Video.play();
+                    Isplaying = true;
+                    Icon2.style.display = 'block';
+                    Icon1.style.display = 'none';
+                    if (!duration) {
+                        VideoDuration = Video.duration
+                        duration = timeDisplay(VideoDuration); // IOS
+                        return
+                    }
+                    return
+                }
+                Video.pause();
+                Icon1.style.display = 'block';
+                Icon2.style.display = 'none';
+            };
+
+            var FullscreenBool = false
+            function FullscrenButton() {
+                FullscreenBool = !FullscreenBool;
+                if (FullscreenBool) {
+                    Full1.style.display = 'block';
+                    Full2.style.display = 'none';
+                    if (Container.requestFullscreen) {
+                        Container.requestFullscreen();
+                    } else if (Container.webkitRequestFullscreen) {
+                        Container.webkitRequestFullscreen();
+                    } else if (Container.msRequestFullscreen) {
+                        Container.msRequestFullscreen();
+                    }
+                    return
+                }
+                Full1.style.display = 'none';
+                Full2.style.display = 'block';
+                if (D.exitFullscreen) {
+                    D.exitFullscreen();
+                } else if (D.webkitExitFullscreen) {
+                    D.webkitExitFullscreen();
+                } else if (D.msExitFullscreen) {
+                    D.msExitFullscreen();
+                }
+            }
+
+            Fullscreen.addEventListener('click', FullscrenButton);
+            var DebugOpen = false
+            function DebuggerPanelSystem(){
+                DebugOpen = !DebugOpen
+                if (DebugOpen) {
+                    Debug1.style.display = 'none';
+                    Debug2.style.display = 'block';
+                    DebuggerPanel.className = 'set'
+                    DebuggerPanel.style.display = 'block';
+                    DebuggerPanel.classList.toggle('open')
+                    return
+                }
+                DebuggerPanel.className = 'set'
+                DebuggerPanel.classList.toggle('close')
+                Debug1.style.display = 'block';
+                Debug2.style.display = 'none';
+            }
+
+            Debugger.addEventListener('click', DebuggerPanelSystem);
+            Debugger.addEventListener('click', DebuggerPanelSystem);
+
+            Audiobutton();
+            ControlPlay.addEventListener('click', PlayButton);
+            var VideoDuration = 0, duration
+            AudioControl.addEventListener('click', function() {
+                if (Video.volume > 0) {
+                    Video.volume = 0
+                    Audiobutton();
+                    return
+                }
+                Video.volume = 1
+                Audiobutton();
+            });
+            seekBar.addEventListener('input', function() {
+                Video.currentTime = (seekBar.value / 100) * VideoDuration;
+            });
+
+            SeekbarAudio.addEventListener('input', function() {
+                Video.volume = (SeekbarAudio.value / 100)
+                Audiobutton();
+            });
+
+            function timeDisplay(Sec) {
+                BufferTime = Video.buffered.end(0);
+                const min = String((Sec / 60) | 0).padStart(2,'0')
+                const sec = String(Sec % 60 | 0).padStart(2,'0')
+                return min + ':' + sec
+            }
+
+            Video.addEventListener('enterpictureinpicture', function() {
+                Control.className = 'close'
+                Follow.className = 'close'
+                PIPVIDEO = true
+            });
+
+            Video.addEventListener('leavepictureinpicture', function() {
+                Control.className = 'open'
+                Follow.className = 'open'
+                Video.play()
+                PlayButton()
+                PIPVIDEO = false
+                if (iOS) {
+                    FullscreenBool = true
+                    FullscrenButton()
+                    FullscrenButton()
+                    return
+                }
+            });
+
+            Video.addEventListener('timeupdate', function() {
+                ProcessDisplay.innerText = timeDisplay(Video.currentTime) + ' / ' + duration;
+                CurrentProcess.style.width = (Video.currentTime / VideoDuration) * 100 + '%'
+                BufferProcess.style.width = (BufferTime / VideoDuration) * 100 + '%'
+                if ((BufferIndex > 0)) {
+                    BufferIndex = 0
+                    Loader.style.display = 'none';
+                    showproblem.innerText = ''
+                    return
+                }
+            });
+            Video.addEventListener('loadedmetadata', function() {
+                VideoDuration = Video.duration
+                duration = timeDisplay(VideoDuration);
+                ProcessDisplay.innerText = '00:00 / ' + duration;
+            });
+
+            const Follow = D.getElementById('Follow')
+            function divFollow(Text, Event) {
+                if (PIPVIDEO) {
+                    return
+                }
+
+                Follow.style.display = 'block';
+                Follow.innerText = Text
+                const touchX = Event.clientX;
+                const touchY = Event.clientY;
+                Follow.style.left = touchX + 'px';
+                Follow.style.top = (touchY - 100) + 'px';
+
+            }
+            
+
+            function clamp(value, min, max) {
+                return Math.min(Math.max(value, min), max);
+            }
+
+            function SeekbarValue(event) {
+                const width = seekBar.clientWidth;
+                if (event.type == 'mousemove') {
+                    divFollow(timeDisplay(clamp((Math.round((event.clientX - seekBar.getBoundingClientRect().left) / width * 100)) / 100, 0,1) * VideoDuration),event)
+                    return
+                }
+                divFollow(timeDisplay((Math.round((seekBar.value - seekBar.min) / (seekBar.max - seekBar.min) * 100) / 100) * VideoDuration),event.touches[0])
+            }
+
+            function AudioValue(event) {
+                const width = SeekbarAudio.clientWidth;
+                if (event.type == 'mousemove') {
+                    divFollow(clamp(Math.round((event.clientX - SeekbarAudio.getBoundingClientRect().left) / width * 100),0,100),event)
+                    return
+                }
+                divFollow(Math.round((SeekbarAudio.value - SeekbarAudio.min) / (SeekbarAudio.max - SeekbarAudio.min) * 100),event.touches[0])
+            }
+
+            function followend() {
+                Follow.style.display = 'none';
+            }
+            Follow.className = 'open';
+            SeekbarAudio.addEventListener('mousemove', AudioValue)
+            SeekbarAudio.addEventListener('touchmove', AudioValue)
+            seekBar.addEventListener('mousemove', SeekbarValue)
+            seekBar.addEventListener('touchmove', SeekbarValue)
+            seekBar.addEventListener('mouseleave', followend)
+            SeekbarAudio.addEventListener('mouseleave',  followend)
+            SeekbarAudio.addEventListener('touchend',  followend)
+            seekBar.addEventListener('touchend', followend)}
+        IsSupport();    
     </script>
 </body>
 </html>
